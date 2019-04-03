@@ -47,7 +47,7 @@ function handleGetMovie(req, res) {
   }
   if (avg_vote !== undefined)  {
     if (isNaN(avg_vote) || parseFloat(avg_vote)<0 || parseFloat(avg_vote)>10) {
-      return res.status(400).send('avg_vote must be a number between 0 and 10')
+      return res.status(400).json({error: 'avg_vote must be a number between 0 and 10'})
     }
     results = results.filter(movie => 
       movie.avg_vote >= parseFloat(avg_vote)
@@ -55,7 +55,7 @@ function handleGetMovie(req, res) {
   }
 
 
-  res.send(results);
+  res.json(results);
 }
 
 app.get('/movie', handleGetMovie);
